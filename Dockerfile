@@ -75,4 +75,5 @@ EXPOSE 1337
 HEALTHCHECK --interval=30s --timeout=10s --start-period=180s --retries=5 \
   CMD node -e "require('http').get('http://localhost:1337', (r) => {if (r.statusCode >= 200 && r.statusCode < 500) process.exit(0); else process.exit(1)}).on('error', () => process.exit(1))" || exit 1
 
+CMD ["npm", "build"]
 CMD ["npm", "start"]
