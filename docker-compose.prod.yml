@@ -1,0 +1,74 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend-prod
+      args:
+        VITE_STRAPI_URL: https://strapi.somanith.org
+    container_name: mosc-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      strapi:
+        condition: service_healthy
+    networks:
+      - mosc-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: strapi-prod
+    container_name: mosc-strapi
+    env_file:
+      - .env
+    environment:
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: ./.tmp/data.db
+      NODE_ENV: production
+    volumes:
+      - strapi_data:/app/.tmp
+      - strapi_uploads:/app/public/uploads
+    ports:
+      - "1337:1337"
+    networks:
+      - mosc-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:1337', (r) => {if (r.statusCode >= 200 && r.statusCode < 500) process.exit(0); else process.exit(1)}).on('error', () => process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+
+networks:
+  mosc-network:
+    driver: bridge
+
+volumes:
+  strapi_data:
+  strapi_uploads:

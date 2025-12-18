@@ -114,7 +114,7 @@ const BlogDetail: React.FC = () => {
           return (
             <blockquote
               key={index}
-              className="border-l-4 border-indigo-600 pl-4 italic text-gray-700 dark:text-gray-300 mb-4"
+              className="border-l-4 border-blue-600 pl-4 italic text-gray-700 dark:text-gray-300 mb-4"
             >
               {block.children?.map((child: any) => child.text).join('')}
             </blockquote>
@@ -148,7 +148,7 @@ const BlogDetail: React.FC = () => {
           <p className="text-red-600 dark:text-red-400 text-lg mb-4">{error || 'Blog not found'}</p>
           <Link
             to="/blog"
-            className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
           >
             ← Back to Blogs
           </Link>
@@ -164,7 +164,7 @@ const BlogDetail: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <Link
             to="/blog"
-            className="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold"
+            className="text-blue-600 dark:text-blue-400 hover:underline font-semibold"
           >
             ← Back to Blogs
           </Link>
@@ -187,7 +187,7 @@ const BlogDetail: React.FC = () => {
         {/* Header */}
         <header className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-full">
+            <span className="text-sm font-semibold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-3 py-1 rounded-full">
               {blog.category}
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400">
@@ -211,7 +211,7 @@ const BlogDetail: React.FC = () => {
 
         {/* Excerpt */}
         {blog.excerpt && (
-          <p className="text-lg text-gray-700 dark:text-gray-300 italic mb-8 border-l-4 border-indigo-600 pl-4">
+          <p className="text-lg text-gray-700 dark:text-gray-300 italic mb-8 border-l-4 border-blue-600 pl-4">
             {blog.excerpt}
           </p>
         )}
@@ -224,7 +224,7 @@ const BlogDetail: React.FC = () => {
         {/* Author Info */}
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-2xl">
+            <div className="w-16 h-16 bg-amber-400 rounded-full flex items-center justify-center text-2xl">
               👤
             </div>
             <div>
@@ -245,7 +245,7 @@ const BlogDetail: React.FC = () => {
           <p className="text-gray-600 dark:text-gray-400 mb-4">Want to read more?</p>
           <Link
             to="/blog"
-            className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
           >
             View All Blogs
           </Link>

@@ -447,7 +447,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    date: Schema.Attribute.Date;
+    date: Schema.Attribute.Date & Schema.Attribute.Required;
     excerpt: Schema.Attribute.Text;
     featured_image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'

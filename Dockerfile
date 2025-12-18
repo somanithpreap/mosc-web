@@ -16,7 +16,9 @@ RUN npm install
 
 COPY frontend/ .
 
-RUN npm run build
+ARG VITE_STRAPI_URL="http://localhost:1337"
+
+RUN VITE_STRAPI_URL=$VITE_STRAPI_URL npm run build
 
 # ============================================
 # FRONTEND PRODUCTION STAGE
