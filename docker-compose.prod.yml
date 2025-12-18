@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   frontend:
     build:
@@ -11,12 +13,9 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-    depends_on:
-      strapi:
-        condition: service_healthy
     networks:
       - mosc-network
-    restart: unless-stopped
+    restart: always
     healthcheck:
       test:
         [
@@ -39,19 +38,19 @@ services:
       target: strapi-prod
     container_name: mosc-strapi
     env_file:
-      - .env
+      - .env.prod
     environment:
       DATABASE_CLIENT: sqlite
-      DATABASE_FILENAME: ./.tmp/data.db
+      DATABASE_FILENAME: /data/db.sqlite3
       NODE_ENV: production
     volumes:
-      - strapi_data:/app/.tmp
+      - strapi_db_data:/data
       - strapi_uploads:/app/public/uploads
     ports:
       - "1337:1337"
     networks:
       - mosc-network
-    restart: unless-stopped
+    restart: always
     healthcheck:
       test:
         [
@@ -70,5 +69,7 @@ networks:
     driver: bridge
 
 volumes:
-  strapi_data:
+  strapi_db_data:
+    driver: local
   strapi_uploads:
+    driver: local
